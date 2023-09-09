@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Domain.Entities.ContaDTO>
+
+@{
+    ViewData["Title"] = "Listar Contas";
+
+
+<div class="content animate-panel" style="padding-bottom: 15px; margin-bottom: 0px; padding-top: 0px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="hpanel">
+                <div class="panel-body col-md-12" style="margin-bottom:50px;">
+                    <div class="table-responsive-">
+
+                        <table id="GridConta" class="datatables display table table-bordered table-striped componentes-table" style="margin-top: 6px; width: 100% !important">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ID</td>
+                                        <td>@item.Nome</td>
+                                        <td>@item.Descricao</td>
+                                        <td>
+                                                @{
+                                                    using (Html.BeginForm("EditarDados", "Conta", new { ID = item.ID, Nome = item.Nome, Descricao = item.Descricao }))
+                                                    {
+                                                        <input type="submit" name="Editar" value="Editar" class="btn btn-primary" />
+                                                    }
+                                                }
+                                        </td>
+                                        <td>@{
+                                                    using (Html.BeginForm("Excluir", "Conta", new { ID = item.ID, Nome = item.Nome, Descricao = item.Descricao }))
+                                                {
+                                                     <input data-confirmprompt="Você tem certeza?" type="submit" name="Excluir" value="Excluir" class="btn btn-danger" />
+                                                }
+                                            }
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+}
